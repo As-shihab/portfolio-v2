@@ -36,30 +36,66 @@ export function Experience() {
     },
   ]
 
+  const highlights = [
+    {
+      title: 'Core focus',
+      items: ['ERP microservices', 'REST APIs', 'OData v4 querying', 'CI/CD automation'],
+    },
+    {
+      title: 'Frontend delivery',
+      items: ['Angular + Tailwind', 'React.js', 'Electron desktop apps', 'Admin portals'],
+    },
+    {
+      title: 'Backend + data',
+      items: ['Laravel', 'Node.js / Express', 'Prisma ORM', 'MySQL, PostgreSQL, MongoDB'],
+    },
+  ]
+
   return (
     <section className="section" id="experience" aria-labelledby="exp-title">
       <div className="container">
         <p className="section-eyebrow">Experience</p>
-        <h2 id="exp-title" className="section-title">Professional experience</h2>
-        <div className="experience-grid">
-          {roles.map((r) => (
-            <article key={r.company} className="experience-card">
-              <div className="experience-header">
-                <div>
-                  <h3>{r.title}</h3>
-                  <p className="muted">{r.company} - {r.period}</p>
+        <h2 id="exp-title" className="section-title gradient-title">Professional experience</h2>
+
+        <div className="credential-grid" style={{ marginTop: '2.5rem' }}>
+          <div className="timeline-section glass-panel">
+            <h3>Career Timeline</h3>
+            <div className="timeline">
+              {roles.map((role) => (
+                <div key={role.company} className="timeline-item">
+                  <span className="dot" />
+                  <h4>{role.title}</h4>
+                  <p className="muted">{role.company}</p>
+                  <p className="muted" style={{ color: 'var(--primary-glow)' }}>{role.period}</p>
+                  <div className="experience-tags" style={{ marginTop: '0.5rem' }}>
+                    {role.tags.map((tag) => (
+                      <span key={tag}>{tag}</span>
+                    ))}
+                  </div>
+                  <ul className="experience-bullets">
+                    {role.bullets.map((bullet) => (
+                      <li key={bullet}>{bullet}</li>
+                    ))}
+                  </ul>
                 </div>
-                <div className="experience-tags">
-                  {r.tags.map((tag) => (
-                    <span key={tag}>{tag}</span>
+              ))}
+            </div>
+          </div>
+
+          <div className="credential-stack">
+            {highlights.map((group) => (
+              <div key={group.title} className="credential-card glass-panel">
+                <h3>{group.title}</h3>
+                <ul className="credential-list">
+                  {group.items.map((item) => (
+                    <li key={item}>
+                      <strong>{item}</strong>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </div>
-              <ul className="experience-bullets">
-                {r.bullets.map((b) => <li key={b}>{b}</li>)}
-              </ul>
-            </article>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

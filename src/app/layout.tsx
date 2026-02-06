@@ -16,17 +16,19 @@ const spaceGrotesk = Space_Grotesk({
 })
 
 export const metadata: Metadata = {
-  title: 'As-Shihab | Portfolio',
-  description: 'Full stack product engineer crafting premium, narrative-first digital experiences.',
+  title: 'Shihab | Portfolio',
+  description: 'Software developer focused on ERP systems, microservices, and modern web applications.',
 }
 
 const themeScript = `
 (() => {
   try {
     const stored = localStorage.getItem('theme');
+    const pref = stored === 'light' || stored === 'dark' || stored === 'system' ? stored : 'system';
     const systemPrefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
-    const theme = stored === 'light' || stored === 'dark' ? stored : (systemPrefersLight ? 'light' : 'dark');
+    const theme = pref === 'system' ? (systemPrefersLight ? 'light' : 'dark') : pref;
     document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.setAttribute('data-theme-pref', pref);
   } catch {}
 })();
 `
@@ -37,7 +39,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" data-theme="dark" className={`${plexSans.variable} ${spaceGrotesk.variable}`}>
+    <html lang="en" data-theme="dark" data-theme-pref="system" className={`${plexSans.variable} ${spaceGrotesk.variable}`}>
       <head>
         <Script id="theme-script" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>

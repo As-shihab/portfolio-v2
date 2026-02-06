@@ -42,16 +42,17 @@ export function Gallery() {
     <section className="section gallery" id="gallery" aria-labelledby="gallery-title">
       <div className="container">
         <p className="section-eyebrow">Visual archive</p>
-        <h2 id="gallery-title" className="section-title">Representative system snapshots</h2>
+        <h2 id="gallery-title" className="section-title gradient-title">Representative system snapshots</h2>
         <p className="section-lede">Representative visuals inspired by the systems and workflows I helped deliver.</p>
       </div>
+
       <div className="gallery-grid">
         {galleryItems.map((item) => (
-          <article key={item.title} className="gallery-item">
-            <img src={item.image} alt={item.title} loading="lazy" />
+          <article key={item.title} className="gallery-item glass-card">
+            <img src={item.image} alt={item.title} loading="lazy" className="gallery-image" />
             <div className="gallery-overlay">
               <div>
-                <p className="muted">{item.location}</p>
+                <p className="gallery-location">{item.location}</p>
                 <h3>{item.title}</h3>
               </div>
               <div className="gallery-tags">
@@ -59,6 +60,9 @@ export function Gallery() {
                   <span key={tag}>{tag}</span>
                 ))}
               </div>
+            </div>
+            <div className="gallery-title">
+              <h3>{item.title}</h3>
             </div>
           </article>
         ))}

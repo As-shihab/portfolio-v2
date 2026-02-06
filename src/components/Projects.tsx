@@ -11,9 +11,7 @@ const projects = [
       'Electron desktop client with Angular + Tailwind UI',
       'CI/CD automation and AWS EC2 deployments',
     ],
-    links: [
-      { label: 'Case study', href: '#', variant: 'primary' },
-    ],
+    links: [{ label: 'Case study', href: '#', variant: 'primary' }],
   },
   {
     title: 'Web Platform with Secure APIs',
@@ -27,9 +25,7 @@ const projects = [
       'FTP workflows and relational product management modules',
       'REST APIs with Prisma data access layer',
     ],
-    links: [
-      { label: 'Case study', href: '#', variant: 'primary' },
-    ],
+    links: [{ label: 'Case study', href: '#', variant: 'primary' }],
   },
 ]
 
@@ -39,9 +35,10 @@ export function Projects() {
       <div className="container">
         <p className="section-eyebrow">Selected work</p>
         <h2 id="projects-title" className="section-title">Project highlights from recent roles</h2>
+
         <div className="projects-grid">
           {projects.map((project) => (
-            <article key={project.title} className="project-card">
+            <article key={project.title} className="project-card glass-card">
               <div className="project-media" style={{ backgroundImage: `url(${project.cover})` }}>
                 <div className="project-meta">
                   <span>{project.company}</span>
@@ -49,7 +46,7 @@ export function Projects() {
                 </div>
               </div>
               <div className="project-body">
-                <h3>{project.title}</h3>
+                <h3 className="gradient-title">{project.title}</h3>
                 <p>{project.description}</p>
                 <div className="project-tags">
                   {project.stack.map((tag) => (

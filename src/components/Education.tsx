@@ -23,7 +23,7 @@ export function Education() {
   const certifications = [
     { name: 'Microservices Architecture', issuer: 'Project Experience', year: '2024' },
     { name: 'CI/CD Automation', issuer: 'AWS EC2 Deployment', year: '2024' },
-    { name: 'Full Stack Web Apps', issuer: 'Internship Experience', year: '2023' },
+    { name: 'Web Application Delivery', issuer: 'Internship Experience', year: '2023' },
   ]
 
   const awards = [
@@ -42,58 +42,46 @@ export function Education() {
     <section className="section" id="education" aria-labelledby="edu-title">
       <div className="container">
         <p className="section-eyebrow">Education</p>
-        <h2 id="edu-title" className="section-title">Education and credentials</h2>
-        <div className="credential-grid">
-          <div className="timeline">
-            {education.map((it) => (
-              <div key={it.school} className="timeline-item">
-                <div className="dot" />
-                <div className="content">
-                  <h3>{it.degree}</h3>
-                  <p className="muted">{it.school} - {it.period}</p>
+        <h2 id="edu-title" className="section-title gradient-title">Education and credentials</h2>
+
+        <div className="credential-grid" style={{ marginTop: '2.5rem' }}>
+          <div className="timeline-section glass-panel">
+            <h3>Academic Timeline</h3>
+            <div className="timeline">
+              {education.map((it) => (
+                <div key={it.school} className="timeline-item">
+                  <span className="dot" />
+                  <h4>{it.degree}</h4>
+                  <p className="muted">{it.school}</p>
+                  <p className="muted" style={{ color: 'var(--primary-glow)' }}>{it.period}</p>
                   <ul className="credential-meta">
                     {it.meta.map((meta) => (
                       <li key={meta}>{meta}</li>
                     ))}
                   </ul>
                 </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="credential-stack">
+            {[
+              { title: 'Highlights', items: certifications },
+              { title: 'Achievements', items: awards },
+              { title: 'Profile', items: community.map((c) => ({ name: c.name, issuer: c.detail, year: '' })) },
+            ].map((group) => (
+              <div key={group.title} className="credential-card glass-panel">
+                <h3>{group.title}</h3>
+                <ul className="credential-list">
+                  {group.items.map((item) => (
+                    <li key={item.name}>
+                      <strong>{item.name}</strong>
+                      <span>{item.issuer} {item.year ? `- ${item.year}` : ''}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
-          </div>
-          <div className="credential-stack">
-            <div className="credential-card">
-              <h3>Highlights</h3>
-              <ul className="credential-list">
-                {certifications.map((item) => (
-                  <li key={item.name}>
-                    <strong>{item.name}</strong>
-                    <span>{item.issuer} - {item.year}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="credential-card">
-              <h3>Achievements</h3>
-              <ul className="credential-list">
-                {awards.map((item) => (
-                  <li key={item.name}>
-                    <strong>{item.name}</strong>
-                    <span>{item.issuer} - {item.year}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="credential-card">
-              <h3>Profile</h3>
-              <ul className="credential-list">
-                {community.map((item) => (
-                  <li key={item.name}>
-                    <strong>{item.name}</strong>
-                    <span>{item.detail}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
           </div>
         </div>
       </div>

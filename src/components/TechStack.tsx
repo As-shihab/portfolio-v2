@@ -29,14 +29,16 @@ export function TechStack() {
         <span className="skill-orb orb-2" />
         <span className="skill-orb orb-3" />
       </div>
+
       <div className="container">
         <p className="section-eyebrow">Skills</p>
         <h2 id="skills-title" className="section-title">Technical skills and tools</h2>
+
         <div className="skills-grid">
           {skillGroups.map((group) => (
-            <article key={group.title} className="skill-group">
+            <article key={group.title} className="skill-group glass-panel">
               <div className="skill-header">
-                <h3>{group.title}</h3>
+                <h3 className="gradient-title">{group.title}</h3>
                 <p className="muted">{group.description}</p>
               </div>
               <div className="skill-tags">
