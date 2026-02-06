@@ -1,18 +1,13 @@
 ---
-title: Hello, Parallax World
-date: 2025-09-01
-summary: Kicking off my new animated portfolio with a first post.
-cover: https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1200&q=80
+title: Building an ERP with Microservices
+date: 2025-10-01
+summary: Lessons from shaping a scalable ERP using service boundaries and multiple data stores.
+cover: https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80
 ---
 
-Welcome to my new portfolio! It's built with React, Framer Motion, and a smooth parallax effect.
+Key takeaways from ERP delivery:
 
-Here are a few things I focused on:
-
-- Subtle motion that enhances, never distracts
-- High contrast dark theme
-- Smooth scrolling and delightful transitions
-
-Stay tuned for more deep dives.
-
-
+- Use clear service boundaries to keep teams and deployments independent.
+- Keep a polyglot data layer when workloads vary across modules.
+- Use CI/CD to reduce manual deployment risk.
+- Document integration points early (API contracts, OData queries, auth).

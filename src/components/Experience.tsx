@@ -1,47 +1,61 @@
 export function Experience() {
   const roles = [
     {
-      company: 'Nebula Studio',
-      title: 'Lead Frontend Engineer',
-      period: '2023 — Present',
+      company: 'Hybritech Innovation Ltd',
+      title: 'Software Developer',
+      period: 'Onsite',
+      tags: ['Microservices', 'ERP', 'CI/CD'],
       bullets: [
-        'Shaped the design system that powers every product surface',
-        'Built cinematic launch pages using React, Vite, and Framer Motion',
-        'Partnered with product to ship experiments that lifted activation by 18%',
+        'Built a full ERP solution using a microservices architecture and a polyglot data layer (MySQL, PostgreSQL, MongoDB).',
+        'Implemented CI/CD pipelines on AWS EC2 for automated testing and deployment.',
+        'Developed an Electron desktop app, Angular + Tailwind frontend, and Laravel/Node.js backend services.',
+        'Used OData v4 in custom services for flexible data querying.',
       ],
     },
     {
-      company: 'Independent',
-      title: 'Senior Product Engineer',
-      period: '2020 — 2023',
+      company: 'Simec System Ltd',
+      title: 'Web Developer (Intern)',
+      period: 'Onsite',
+      tags: ['Node.js', 'React', 'APIs'],
       bullets: [
-        'Delivered premium marketing and customer portals for SaaS founders',
-        'Obsessed over performance budgets and Core Web Vitals',
-        'Mentored teams through TypeScript, testing, and accessibility upgrades',
+        'Built REST APIs with Node.js and Express.js using Prisma, MySQL, and MongoDB.',
+        'Delivered full web applications with React.js and token-based authentication.',
+        'Implemented email verification and file transfer workflow features.',
+        'Developed relational product management modules and admin tools.',
       ],
     },
     {
-      company: 'PixelSmith Agency',
-      title: 'UI Engineer',
-      period: '2018 — 2020',
+      company: 'NR Business LTD',
+      title: 'Funding Manager',
+      period: 'Onsite',
+      tags: ['Client communication', 'Finance'],
       bullets: [
-        'Rapid prototyping for VC pitches and immersive brand stories',
-        'Created interactive data visualisations for enterprise pitches',
-        'Introduced a component library that cut delivery time in half',
+        'Collaborated with American clients to understand business positions.',
+        'Supported loan processing with Benchmark Capital under client terms and conditions.',
       ],
     },
   ]
 
   return (
-    <section className="section" aria-labelledby="exp-title">
+    <section className="section" id="experience" aria-labelledby="exp-title">
       <div className="container">
-        <h2 id="exp-title" className="section-title">Experience</h2>
-        <div className="cards">
+        <p className="section-eyebrow">Experience</p>
+        <h2 id="exp-title" className="section-title">Professional experience</h2>
+        <div className="experience-grid">
           {roles.map((r) => (
-            <article key={r.company} className="card">
-              <h3>{r.title}</h3>
-              <p className="muted">{r.company} • {r.period}</p>
-              <ul>
+            <article key={r.company} className="experience-card">
+              <div className="experience-header">
+                <div>
+                  <h3>{r.title}</h3>
+                  <p className="muted">{r.company} - {r.period}</p>
+                </div>
+                <div className="experience-tags">
+                  {r.tags.map((tag) => (
+                    <span key={tag}>{tag}</span>
+                  ))}
+                </div>
+              </div>
+              <ul className="experience-bullets">
                 {r.bullets.map((b) => <li key={b}>{b}</li>)}
               </ul>
             </article>
@@ -51,5 +65,3 @@ export function Experience() {
     </section>
   )
 }
-
-

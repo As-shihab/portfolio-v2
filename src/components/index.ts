@@ -9,7 +9,6 @@ export * from './Gallery'
 export * from './TechStack'
 export * from './Contact'
 export * from './Footer'
-export * from './NeonCursor'
-export * from './ScrollProgress'
-
-
+export * from './BackgroundParallax'
+export * from './ClientButton'
+export * from './ThemeToggle'
