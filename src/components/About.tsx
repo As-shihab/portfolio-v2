@@ -23,7 +23,7 @@ export function About() {
             <h2 id="about-title" className="section-title gradient-title">About</h2>
             <p className="section-lede">
               I build software applications with a focus on clean architecture, scalable services, and polished user interfaces.
-              I enjoy working on ERP systems, microservices, and modern web apps.
+              I enjoy working on ERP systems, microservices, and modern web apps. Founder of Aptigen.
             </p>
             <p className="section-lede" style={{ marginTop: '1rem' }}>
               My goal is to keep improving, take on challenging work, and contribute to teams that value quality engineering.

@@ -1,4 +1,4 @@
-import { FaAngular, FaNodeJs } from 'react-icons/fa'
+import { FaAngular, FaGithub, FaNodeJs } from 'react-icons/fa'
 import { SiLaravel, SiPrisma } from 'react-icons/si'
 
 const stackIcons = [
@@ -40,7 +40,6 @@ export function Hero() {
       </div>
 
       <div className="container hero-content">
-        <p className="hero-eyebrow">Software Developer</p>
         <h1 className="hero-title">
           Abdus Salam <span>Shihab</span>
         </h1>
@@ -54,8 +53,15 @@ export function Hero() {
           >
             Download Resume
           </a>
-          <a href="#projects" className="btn ghost">
-            View Work
+          <a
+            href="https://github.com/As-shihab"
+            className="btn ghost"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="GitHub profile"
+          >
+            <FaGithub />
+            GitHub
           </a>
         </div>
       </div>

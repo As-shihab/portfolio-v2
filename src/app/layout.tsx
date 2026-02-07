@@ -24,7 +24,7 @@ const themeScript = `
 (() => {
   try {
     const stored = localStorage.getItem('theme');
-    const pref = stored === 'light' || stored === 'dark' || stored === 'system' ? stored : 'system';
+    const pref = stored === 'light' || stored === 'dark' || stored === 'system' ? stored : 'dark';
     const systemPrefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
     const theme = pref === 'system' ? (systemPrefersLight ? 'light' : 'dark') : pref;
     document.documentElement.setAttribute('data-theme', theme);
@@ -39,7 +39,13 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" data-theme="dark" data-theme-pref="system" className={`${plexSans.variable} ${spaceGrotesk.variable}`}>
+    <html
+      lang="en"
+      data-theme="dark"
+      data-theme-pref="dark"
+      className={`${plexSans.variable} ${spaceGrotesk.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         <Script id="theme-script" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>

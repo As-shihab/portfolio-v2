@@ -9,7 +9,7 @@ export function Education() {
     {
       school: 'Darunnajat Siddikia Kamil Madrasah',
       degree: 'Higher Secondary Certificate (HSC)',
-      period: 'Passing Year: 2021',
+      period: 'Passing Year: 2021 - 2022',
       meta: ['Board: Madrasah', 'Group: Science', 'GPA: 5.00 / 5.00'],
     },
     {

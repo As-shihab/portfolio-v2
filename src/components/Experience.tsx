@@ -1,15 +1,29 @@
 export function Experience() {
   const roles = [
     {
-      company: 'Hybritech Innovation Ltd',
+      company: 'Hybritech Innovation Ltd || SCT Bangla (Project-based)',
       title: 'Software Developer',
-      period: 'Onsite',
+      period: 'December 2025 - Present',
       tags: ['Microservices', 'ERP', 'CI/CD'],
       bullets: [
         'Built a full ERP solution using a microservices architecture and a polyglot data layer (MySQL, PostgreSQL, MongoDB).',
         'Implemented CI/CD pipelines on AWS EC2 for automated testing and deployment.',
         'Developed an Electron desktop app, Angular + Tailwind frontend, and Laravel/Node.js backend services.',
         'Used OData v4 in custom services for flexible data querying.',
+        'Delivered project-based work for SCT Bangla through Hybritech Innovation Ltd.',
+      ],
+    },
+    {
+      company: 'Hybritech Innovation Ltd || SCT Bangla (Project-based)',
+      title: 'Junior Software Developer',
+      period: 'Jan 2, 2025 - December 2025',
+      tags: ['Microservices', 'ERP', 'CI/CD'],
+      bullets: [
+        'Built a full ERP solution using a microservices architecture and a polyglot data layer (MySQL, PostgreSQL, MongoDB).',
+        'Implemented CI/CD pipelines on AWS EC2 for automated testing and deployment.',
+        'Developed an Electron desktop app, Angular + Tailwind frontend, and Laravel/Node.js backend services.',
+        'Used OData v4 in custom services for flexible data querying.',
+        'Delivered project-based work for SCT Bangla through Hybritech Innovation Ltd.',
       ],
     },
     {
@@ -62,7 +76,7 @@ export function Experience() {
             <h3>Career Timeline</h3>
             <div className="timeline">
               {roles.map((role) => (
-                <div key={role.company} className="timeline-item">
+                <div key={`${role.company}-${role.title}`} className="timeline-item">
                   <span className="dot" />
                   <h4>{role.title}</h4>
                   <p className="muted">{role.company}</p>

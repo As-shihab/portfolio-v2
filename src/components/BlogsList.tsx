@@ -58,7 +58,7 @@ export function BlogsList({ posts }: { posts: BlogPost[] }) {
                 ))}
               </div>
               <a className="btn ghost" href={post.link}>
-                Read topic ->
+                Read topic
               </a>
             </div>
           </article>

@@ -2,28 +2,44 @@
 
 :root {
   color-scheme: dark;
-  --primary: #60a5fa;
-  --primary-2: #93c5fd;
-  --secondary: #93c5fd;
-  --primary-glow: rgba(96, 165, 250, 0.7);
-  --glow: rgba(96, 165, 250, 0.35);
-  --gradient-primary: linear-gradient(135deg, #60a5fa 0%, #93c5fd 100%);
+  --bg: #05060a;
+  --bg-2: #070a10;
+  --panel: #0b0f16;
+  --panel-2: #0e141d;
+  --text: #e7edf6;
+  --muted: #7f8a9a;
+  --primary: #5b8bff;
+  --primary-2: #7aa2ff;
+  --secondary: #7aa2ff;
+  --primary-glow: rgba(91, 139, 255, 0.55);
+  --glow: rgba(91, 139, 255, 0.22);
+  --stroke: rgba(255, 255, 255, 0.06);
+  --shadow: 0 30px 90px -70px rgba(0, 0, 0, 0.95);
+  --gradient-primary: linear-gradient(135deg, #5b8bff 0%, #7aa2ff 100%);
   --text-primary: var(--text);
   --text-secondary: var(--muted);
   --text-muted: var(--muted);
-  --border-glass: rgba(255, 255, 255, 0.12);
+  --border-glass: rgba(255, 255, 255, 0.08);
 }
 
 html, body, .app {
   transition: background-color 0.4s ease, color 0.3s ease;
 }
 
+html.theme-transition,
+html.theme-transition * {
+  transition: background 0.35s ease, color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  html.theme-transition,
+  html.theme-transition * {
+    transition: none;
+  }
+}
+
 body {
   font-family: var(--font-body), 'IBM Plex Sans', 'Segoe UI', Tahoma, sans-serif;
-  background:
-    radial-gradient(1200px 800px at 80% -20%, rgba(96, 165, 250, 0.22), transparent 60%),
-    radial-gradient(900px 600px at -10% 20%, rgba(147, 197, 253, 0.16), transparent 60%),
-    linear-gradient(180deg, #0b0f14 0%, #0a0e13 100%);
+  background: var(--bg);
   background-attachment: fixed;
   overflow-x: hidden;
   cursor: auto;
@@ -40,11 +56,10 @@ body {
   position: fixed;
   inset: 0;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-  background-size: 80px 80px;
-  mask-image: radial-gradient(70% 60% at 50% 20%, rgba(0, 0, 0, 0.85), transparent 75%);
-  opacity: 0.35;
+    linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+  background-size: 64px 64px;
+  opacity: 0.4;
   pointer-events: none;
   z-index: 0;
 }
@@ -53,11 +68,8 @@ body::after {
   content: '';
   position: fixed;
   inset: 0;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
-  background-size: 64px 64px;
-  opacity: 0.25;
+  background: none;
+  opacity: 0;
   pointer-events: none;
   z-index: 0;
   transition: opacity 0.4s ease;
@@ -113,11 +125,16 @@ button.btn {
 }
 
 .nav-menu {
-  position: relative;
+  position: static;
+  display: flex;
+  align-items: center;
 }
 .nav-menu > summary {
   list-style: none;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 .nav-menu > summary::-webkit-details-marker {
   display: none;
@@ -138,11 +155,52 @@ button.btn {
 
 .nav-actions { display: none; }
 .nav-theme { margin-top: 8px; display: flex; }
-.nav-theme .theme-toggle { width: 100%; justify-content: center; }
-.theme-toggle {
+.nav-theme .theme-switch { width: 100%; justify-content: center; }
+.theme-switch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
   border-radius: 999px;
-  padding: 8px 14px;
-  font-size: 13px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(10, 14, 20, 0.6);
+  color: var(--text);
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.theme-switch:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+.theme-switch-track {
+  position: relative;
+  width: 42px;
+  height: 22px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  display: inline-flex;
+  align-items: center;
+  padding: 2px;
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.theme-switch-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  box-shadow: 0 4px 10px -6px rgba(0, 0, 0, 0.8);
+  transform: translateX(0);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+.theme-switch[aria-checked='true'] .theme-switch-track {
+  background: rgba(96, 165, 250, 0.25);
+  border-color: rgba(96, 165, 250, 0.55);
+  box-shadow: 0 0 14px rgba(96, 165, 250, 0.25);
+}
+.theme-switch[aria-checked='true'] .theme-switch-thumb {
+  transform: translateX(20px);
+  background: #0b1220;
 }
 @media (min-width: 900px) {
   .nav-actions { display: flex; align-items: center; gap: 12px; }
@@ -157,9 +215,26 @@ button.btn {
   background-attachment: fixed;
 }
 
+.hero-bg,
+.hero-parallax,
+.global-parallax {
+  display: none;
+}
+
+.global-orb,
+.global-beam,
+.stars {
+  animation: none;
+}
+.global-orb,
+.global-beam {
+  opacity: 0.22;
+}
+.glow { opacity: 0.4; }
+
 .hero-stack-icon.float {
-  animation: float-drift 8s ease-in-out infinite;
-  will-change: transform;
+  animation: none;
+  will-change: auto;
 }
 @media (max-width: 720px) {
   .hero-stack { display: none; }
@@ -206,15 +281,8 @@ button.btn {
   background: radial-gradient(900px 420px at 20% 0%, rgba(96, 165, 250, 0.08), transparent);
 }
 
-.hero-parallax .parallax-ring {
-  animation: ring-drift 18s ease-in-out infinite;
-}
-.hero-parallax .ring-2 { animation-duration: 22s; }
-.hero-parallax .ring-3 { animation-duration: 26s; }
-.hero-parallax .parallax-shard {
-  animation: shard-drift 14s ease-in-out infinite;
-}
-.hero-parallax .shard-2 { animation-duration: 18s; }
+.hero-parallax .parallax-ring { animation: none; }
+.hero-parallax .parallax-shard { animation: none; }
 
 @keyframes float-drift {
   0%, 100% { transform: translateY(0); }
@@ -338,17 +406,32 @@ html[data-theme='light'] {
 }
 
 html[data-theme='light'] body {
-  background:
-    radial-gradient(1200px 800px at 80% -20%, rgba(96, 165, 250, 0.18), transparent 60%),
-    radial-gradient(900px 600px at -10% 20%, rgba(147, 197, 253, 0.12), transparent 60%),
-    linear-gradient(180deg, #f8fafc 0%, #eef2f6 100%);
+  background: var(--bg);
 }
 
 html[data-theme='light'] body::after {
-  opacity: 0.12;
+  opacity: 0;
 }
 
-html[data-theme='light'] body::before { opacity: 0.15; }
+html[data-theme='light'] body::before { opacity: 0; }
+html[data-theme='light'] .app::before {
+  background-image:
+    linear-gradient(rgba(15, 23, 42, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.12) 1px, transparent 1px);
+  opacity: 0.28;
+}
+
+@media (max-width: 900px) {
+  .contact-shell {
+    padding: 1.5rem;
+  }
+}
+html[data-theme='light'] body::after {
+  background: none;
+}
+html[data-theme='light'] .grid-overlay {
+  background: none;
+}
 html[data-theme='light'] .nav {
   background: rgba(248, 250, 252, 0.88);
   border-color: rgba(15, 23, 42, 0.12);
@@ -358,6 +441,26 @@ html[data-theme='light'] .nav-toggle { border-color: rgba(15, 23, 42, 0.2); }
 html[data-theme='light'] .nav-drawer {
   background: #ffffff;
   border-color: rgba(15, 23, 42, 0.12);
+}
+html[data-theme='light'] .theme-switch {
+  background: rgba(248, 250, 252, 0.9);
+  border-color: rgba(15, 23, 42, 0.16);
+  color: #0b1220;
+}
+html[data-theme='light'] .theme-switch-track {
+  background: rgba(15, 23, 42, 0.08);
+  border-color: rgba(15, 23, 42, 0.2);
+}
+html[data-theme='light'] .theme-switch-thumb {
+  background: #f8fafc;
+  box-shadow: 0 4px 10px -6px rgba(15, 23, 42, 0.5);
+}
+html[data-theme='light'] .theme-switch[aria-checked='true'] .theme-switch-track {
+  background: rgba(59, 130, 246, 0.22);
+  border-color: rgba(59, 130, 246, 0.5);
+}
+html[data-theme='light'] .theme-switch[aria-checked='true'] .theme-switch-thumb {
+  background: #0f172a;
 }
 html[data-theme='light'] .hero-stack-icon {
   background: rgba(255, 255, 255, 0.88);
@@ -390,6 +493,12 @@ html[data-theme='light'] .post,
 html[data-theme='light'] .credential-card,
 html[data-theme='light'] .gallery-item {
   border-color: rgba(15, 23, 42, 0.12);
+}
+html[data-theme='light'] .credential-list li {
+  border-bottom-color: rgba(15, 23, 42, 0.12);
+}
+html[data-theme='light'] .timeline:before {
+  background: rgba(15, 23, 42, 0.12);
 }
 html[data-theme='light'] .global-orb,
 html[data-theme='light'] .global-beam,

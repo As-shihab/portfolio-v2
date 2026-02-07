@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 type ThemePref = 'light' | 'dark' | 'system'
 
@@ -15,7 +15,33 @@ const resolveTheme = (pref: ThemePref) => {
 }
 
 export function ThemeToggle() {
-  const [pref, setPref] = useState<ThemePref>('system')
+  const [pref, setPref] = useState<ThemePref>('dark')
+  const [resolved, setResolved] = useState<'light' | 'dark'>('dark')
+  const [ready, setReady] = useState(false)
+  const mountedRef = useRef(false)
+  const transitionRef = useRef<number | null>(null)
+
+  const applyTheme = useCallback((nextPref: ThemePref, withTransition: boolean) => {
+    if (typeof window === 'undefined') return
+    const nextResolved = resolveTheme(nextPref)
+    document.documentElement.setAttribute('data-theme', nextResolved)
+    document.documentElement.setAttribute('data-theme-pref', nextPref)
+    setResolved(nextResolved)
+
+    if (!withTransition) return
+    document.documentElement.classList.add('theme-transition')
+    if (transitionRef.current) window.clearTimeout(transitionRef.current)
+    transitionRef.current = window.setTimeout(() => {
+      document.documentElement.classList.remove('theme-transition')
+    }, 360)
+  }, [])
+
+  useEffect(() => {
+    return () => {
+      if (typeof window === 'undefined') return
+      if (transitionRef.current) window.clearTimeout(transitionRef.current)
+    }
+  }, [])
 
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -23,46 +49,47 @@ export function ThemeToggle() {
     const nextPref: ThemePref =
       stored === 'light' || stored === 'dark' || stored === 'system'
         ? stored
-        : 'system'
+        : 'dark'
 
     setPref(nextPref)
+    setReady(true)
   }, [])
 
   useEffect(() => {
-    if (typeof window === 'undefined') return
-    const resolved = resolveTheme(pref)
-    document.documentElement.setAttribute('data-theme', resolved)
-    document.documentElement.setAttribute('data-theme-pref', pref)
+    if (!ready) return
+    applyTheme(pref, mountedRef.current)
+    if (!mountedRef.current) mountedRef.current = true
 
     const media = window.matchMedia?.('(prefers-color-scheme: light)')
     if (!media) return
     const handler = () => {
       if (pref !== 'system') return
-      const nextResolved = resolveTheme('system')
-      document.documentElement.setAttribute('data-theme', nextResolved)
+      applyTheme('system', true)
     }
     media.addEventListener?.('change', handler)
     return () => media.removeEventListener?.('change', handler)
-  }, [pref])
+  }, [pref, applyTheme, ready])
 
   const cycleTheme = () => {
-    const next: ThemePref = pref === 'system' ? 'dark' : pref === 'dark' ? 'light' : 'system'
+    const next: ThemePref = resolved === 'dark' ? 'light' : 'dark'
+    applyTheme(next, true)
     setPref(next)
     localStorage.setItem(storageKey, next)
-    const resolved = resolveTheme(next)
-    document.documentElement.setAttribute('data-theme', resolved)
-    document.documentElement.setAttribute('data-theme-pref', next)
   }
 
-  const label = useMemo(() => {
-    if (pref === 'system') return 'Theme: System'
-    if (pref === 'dark') return 'Theme: Dark'
-    return 'Theme: Light'
-  }, [pref])
-
   return (
-    <button type="button" className="btn ghost theme-toggle" onClick={cycleTheme}>
-      {label}
+    <button
+      type="button"
+      className="theme-switch"
+      onClick={cycleTheme}
+      role="switch"
+      aria-checked={resolved === 'dark'}
+      aria-label="Toggle theme"
+      title="Toggle theme"
+    >
+      <span className="theme-switch-track" aria-hidden="true">
+        <span className="theme-switch-thumb" />
+      </span>
     </button>
   )
 }
