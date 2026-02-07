@@ -10,10 +10,12 @@ import { Blogs } from '@/components/Blogs'
 import { Contact } from '@/components/Contact'
 import { Footer } from '@/components/Footer'
 import { BackgroundParallax } from '@/components/BackgroundParallax'
+import { ScrollReveal } from '@/components/ScrollReveal'
 
 export default function Home() {
   return (
     <div className="app">
+      <ScrollReveal />
       <BackgroundParallax />
       <Navbar />
       <main>

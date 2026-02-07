@@ -56,10 +56,10 @@ body {
   position: fixed;
   inset: 0;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+    linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
   background-size: 64px 64px;
-  opacity: 0.4;
+  opacity: 0.5;
   pointer-events: none;
   z-index: 0;
 }
@@ -125,25 +125,9 @@ button.btn {
 }
 
 .nav-menu {
-  position: static;
+  position: relative;
   display: flex;
   align-items: center;
-}
-.nav-menu > summary {
-  list-style: none;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-.nav-menu > summary::-webkit-details-marker {
-  display: none;
-}
-.nav-menu .nav-drawer {
-  display: none;
-}
-.nav-menu[open] .nav-drawer {
-  display: flex;
 }
 
 .nav-drawer a {
@@ -153,7 +137,12 @@ button.btn {
 }
 .nav-drawer a:hover { color: var(--text); }
 
-.nav-actions { display: none; }
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
 .nav-theme { margin-top: 8px; display: flex; }
 .nav-theme .theme-switch { width: 100%; justify-content: center; }
 .theme-switch {
@@ -203,7 +192,7 @@ button.btn {
   background: #0b1220;
 }
 @media (min-width: 900px) {
-  .nav-actions { display: flex; align-items: center; gap: 12px; }
+  .nav-actions { display: flex; align-items: center; gap: 12px; margin-left: 0; }
   .nav-menu { display: none; }
 }
 
@@ -230,7 +219,7 @@ button.btn {
 .global-beam {
   opacity: 0.22;
 }
-.glow { opacity: 0.4; }
+.glow { opacity: 0.5; }
 
 .hero-stack-icon.float {
   animation: none;
@@ -241,13 +230,24 @@ button.btn {
 }
 
 .glow-1 {
-  background: radial-gradient(closest-side, rgba(96, 165, 250, 0.4), transparent);
+  background: radial-gradient(closest-side, rgba(96, 165, 250, 0.5), transparent);
 }
 .glow-2 {
-  background: radial-gradient(closest-side, rgba(147, 197, 253, 0.35), transparent);
+  background: radial-gradient(closest-side, rgba(147, 197, 253, 0.42), transparent);
 }
 .hero-haze {
-  background: radial-gradient(circle at 30% 40%, rgba(96, 165, 250, 0.25), transparent 60%);
+  background: radial-gradient(circle at 30% 40%, rgba(96, 165, 250, 0.32), transparent 60%);
+}
+.hero-bg::before {
+  background:
+    radial-gradient(520px 280px at 20% 20%, rgba(96, 165, 250, 0.26), transparent 60%),
+    radial-gradient(440px 260px at 78% 14%, rgba(147, 197, 253, 0.2), transparent 62%),
+    radial-gradient(420px 300px at 50% 85%, rgba(96, 165, 250, 0.16), transparent 65%);
+  opacity: 0.8;
+}
+.hero-bg::after {
+  background: linear-gradient(180deg, rgba(96, 165, 250, 0.16) 0%, rgba(5, 6, 10, 0.35) 60%, rgba(5, 6, 10, 0.85) 100%);
+  opacity: 0.75;
 }
 .floater {
   background: linear-gradient(135deg, rgba(96, 165, 250, 0.35), rgba(147, 197, 253, 0.22));
@@ -466,6 +466,12 @@ html[data-theme='light'] .hero-stack-icon {
   background: rgba(255, 255, 255, 0.88);
   border-color: rgba(15, 23, 42, 0.12);
   color: #0b1220;
+}
+html[data-theme='light'] .hero {
+  background:
+    radial-gradient(900px 420px at 18% -10%, rgba(59, 130, 246, 0.16), transparent 60%),
+    radial-gradient(720px 380px at 86% 0%, rgba(96, 165, 250, 0.14), transparent 62%),
+    linear-gradient(180deg, rgba(248, 250, 252, 0.95) 0%, rgba(226, 232, 240, 0.85) 100%);
 }
 html[data-theme='light'] .blog-card-content {
   background: linear-gradient(160deg, rgba(255, 255, 255, 0.96), rgba(240, 244, 248, 0.9));

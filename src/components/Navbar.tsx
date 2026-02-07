@@ -1,8 +1,5 @@
-'use client'
-
-import { useEffect, useRef } from 'react'
-import { FaBars } from 'react-icons/fa'
 import { ThemeToggle } from './ThemeToggle'
+import { MobileMenu } from './MobileMenu'
 
 const links = [
   { href: '#home', label: 'Home' },
@@ -13,26 +10,6 @@ const links = [
 ]
 
 export function Navbar() {
-  const menuRef = useRef<HTMLDetailsElement | null>(null)
-
-  useEffect(() => {
-    const handlePointerDown = (event: PointerEvent) => {
-      const menu = menuRef.current
-      if (!menu || !menu.open) return
-      const target = event.target as Node
-      if (!menu.contains(target)) {
-        menu.open = false
-      }
-    }
-
-    document.addEventListener('pointerdown', handlePointerDown)
-    return () => document.removeEventListener('pointerdown', handlePointerDown)
-  }, [])
-
-  const closeMenu = () => {
-    if (menuRef.current) menuRef.current.open = false
-  }
-
   return (
     <header className="nav">
       <a href="#home" className="logo">Shihab</a>
@@ -49,21 +26,7 @@ export function Navbar() {
         <ThemeToggle />
       </div>
 
-      <details className="nav-menu" ref={menuRef}>
-        <summary className="nav-toggle" aria-label="Open navigation menu">
-          <FaBars aria-hidden="true" />
-        </summary>
-        <div className="nav-drawer">
-          {links.map((link) => (
-            <a key={link.href} href={link.href} onClick={closeMenu}>
-              {link.label}
-            </a>
-          ))}
-          <div className="nav-theme">
-            <ThemeToggle />
-          </div>
-        </div>
-      </details>
+      <MobileMenu links={links} />
     </header>
   )
 }

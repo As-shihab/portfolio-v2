@@ -150,6 +150,55 @@ img { display: block; max-width: 100%; }
 }
 .muted { color: var(--muted); }
 
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  filter: blur(2px);
+  transition: opacity 0.55s ease, transform 0.55s ease, filter 0.55s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  filter: blur(2px);
+}
+.reveal.is-visible {
+  animation: reveal-up 600ms ease forwards;
+}
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+    filter: blur(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+  .reveal.is-visible { animation: none; }
+}
+
 .scroll-progress {
   position: fixed;
   top: 0;
@@ -238,6 +287,7 @@ img { display: block; max-width: 100%; }
   justify-content: center;
   font-size: 18px;
 }
+.nav-menu { margin-left: 8px; position: relative; z-index: 80; }
 .nav-drawer {
   position: absolute;
   top: calc(100% + 12px);
@@ -253,6 +303,31 @@ img { display: block; max-width: 100%; }
   border-radius: 16px;
   max-height: min(60vh, 420px);
   overflow-y: auto;
+  z-index: 70;
+  box-shadow: 0 24px 60px -40px rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  transform: translateY(-6px) scale(0.98);
+  pointer-events: none;
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+.nav-drawer.open {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 8, 14, 0.55);
+  backdrop-filter: blur(2px);
+  z-index: 50;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+.nav-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
 }
 @media (min-width: 900px) {
   .nav .nav-links { display: flex; }
@@ -307,6 +382,10 @@ img { display: block; max-width: 100%; }
   align-items: center;
   overflow: hidden;
   position: relative;
+  background:
+    radial-gradient(900px 420px at 18% -10%, rgba(167, 139, 250, 0.18), transparent 60%),
+    radial-gradient(720px 380px at 86% 0%, rgba(56, 189, 248, 0.14), transparent 62%),
+    linear-gradient(180deg, rgba(11, 15, 20, 0.65) 0%, rgba(11, 15, 20, 0.95) 100%);
 }
 .hero-bg { position: absolute; inset: 0; pointer-events: none; }
 .glow { position: absolute; filter: blur(120px); opacity: 0.65; }
@@ -327,10 +406,32 @@ img { display: block; max-width: 100%; }
 .grid-overlay {
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-image: linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
   background-size: 36px 36px;
   mask-image: radial-gradient(600px 300px at 50% 20%, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 1));
+}
+.hero-bg::before {
+  content: '';
+  position: absolute;
+  inset: -10% -5% auto -5%;
+  height: 70%;
+  background:
+    radial-gradient(520px 280px at 20% 20%, rgba(45, 212, 191, 0.22), transparent 60%),
+    radial-gradient(440px 260px at 78% 14%, rgba(247, 185, 85, 0.18), transparent 62%),
+    radial-gradient(420px 300px at 50% 85%, rgba(45, 212, 191, 0.14), transparent 65%);
+  opacity: 0.75;
+  filter: blur(2px);
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(45, 212, 191, 0.12) 0%, rgba(11, 15, 20, 0.35) 60%, rgba(11, 15, 20, 0.8) 100%);
+  opacity: 0.7;
+  pointer-events: none;
 }
 .stars {
   position: absolute;
