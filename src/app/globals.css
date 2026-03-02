@@ -204,11 +204,9 @@ button.btn {
   background-attachment: fixed;
 }
 
-.hero-bg,
+.hero-bg { display: block; }
 .hero-parallax,
-.global-parallax {
-  display: none;
-}
+.global-parallax { display: none; }
 
 .global-orb,
 .global-beam,
@@ -430,7 +428,12 @@ html[data-theme='light'] body::after {
   background: none;
 }
 html[data-theme='light'] .grid-overlay {
-  background: none;
+  background-image:
+    linear-gradient(rgba(15, 23, 42, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.08) 1px, transparent 1px),
+    linear-gradient(rgba(59, 130, 246, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.12) 1px, transparent 1px);
+  background-size: 28px 28px, 28px 28px, 140px 140px, 140px 140px;
 }
 html[data-theme='light'] .nav {
   background: rgba(248, 250, 252, 0.88);

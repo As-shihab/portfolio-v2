@@ -1,5 +1,5 @@
 import type { IconType } from 'react-icons'
-import { FaEnvelope, FaGithub, FaGlobe, FaLinkedinIn, FaPhoneAlt } from 'react-icons/fa'
+import { FaEnvelope, FaGithub, FaLinkedinIn, FaPhoneAlt } from 'react-icons/fa'
 
 type ContactLink = {
   label: string
@@ -11,7 +11,6 @@ type ContactLink = {
 const contactLinks: ContactLink[] = [
   { label: 'Email', value: 'study.shihab@gmail.com', href: 'mailto:study.shihab@gmail.com', icon: FaEnvelope },
   { label: 'Phone', value: '+8801604279418', href: 'tel:+8801604279418', icon: FaPhoneAlt },
-  { label: 'Website', value: 'as-shihab.netlify.app', href: 'https://as-shihab.netlify.app', icon: FaGlobe },
   { label: 'GitHub', value: 'github.com/As-shihab', href: 'https://github.com/As-shihab', icon: FaGithub },
   { label: 'LinkedIn', value: 'linkedin.com/in/as-shihab', href: 'https://www.linkedin.com/in/as-shihab/', icon: FaLinkedinIn },
 ]

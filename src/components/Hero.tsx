@@ -1,4 +1,4 @@
-import { FaAngular, FaGithub, FaNodeJs } from 'react-icons/fa'
+import { FaAngular, FaGithub, FaLinkedinIn, FaNodeJs } from 'react-icons/fa'
 import { SiLaravel, SiPrisma } from 'react-icons/si'
 
 const stackIcons = [
@@ -40,29 +40,61 @@ export function Hero() {
       </div>
 
       <div className="container hero-content">
-        <h1 className="hero-title">
-          Abdus Salam <span>Shihab</span>
-        </h1>
-        <p className="hero-subtitle">
-          Building ERP systems, microservices, and modern web apps.
-        </p>
-        <div className="cta">
-          <a
-            href="https://github.com/As-shihab/as-shihab/releases/download/resume/shihab_resume.pdf"
-            className="btn primary"
-          >
-            Download Resume
-          </a>
-          <a
-            href="https://github.com/As-shihab"
-            className="btn ghost"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="GitHub profile"
-          >
-            <FaGithub />
-            GitHub
-          </a>
+        <div className="hero-layout">
+          <div className="hero-main">
+            <p className="hero-eyebrow">Full Stack Developer</p>
+            <h1 className="hero-title">
+              Abdus Salam <span>Shihab</span>
+            </h1>
+            <p className="hero-subtitle">
+              Building ERP systems, microservices, and modern web apps.
+            </p>
+            <div className="hero-tags" aria-label="Core skills">
+              <span className="hero-tag">ERP Systems</span>
+              <span className="hero-tag">Microservices</span>
+              <span className="hero-tag">REST APIs</span>
+            </div>
+            <div className="cta">
+              <a
+                href="https://github.com/As-shihab/as-shihab/releases/download/resume/shihab_resume.pdf"
+                className="btn primary"
+              >
+                Download Resume
+              </a>
+              <a
+                href="https://github.com/As-shihab"
+                className="btn ghost"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="GitHub profile"
+              >
+                <FaGithub />
+                GitHub
+              </a>
+              <a
+                href="https://www.linkedin.com/in/as-shihab/"
+                className="btn ghost"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="LinkedIn profile"
+              >
+                <FaLinkedinIn />
+                LinkedIn
+              </a>
+            </div>
+          </div>
+
+          <div className="hero-photo-shell" aria-label="As Shihab profile image">
+            <span className="hero-photo-glow" aria-hidden="true" />
+            <span className="hero-photo-ring" aria-hidden="true" />
+            <img
+              src="/hero.jpeg"
+              alt="As Shihab working at a computer"
+              className="hero-photo"
+              loading="eager"
+              decoding="async"
+            />
+          </div>
         </div>
       </div>
     </section>
